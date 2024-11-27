@@ -66,20 +66,7 @@ let currentModel, facemesh;
 	// 6, Live2Dモデルを配置する
 	app.stage.addChild(currentModel);
 
-	// 7, フェイスメッシュの読み込みと設定をする
-	facemesh = new FaceMesh({
-		locateFile: file => {
-			return `https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/${file}`;
-		}
-	});
-	facemesh.setOptions({
-		maxNumFaces: 1,
-		refineLandmarks: true,
-		minDetectionConfidence: 0.5,
-		minTrackingConfidence: 0.5
-	});
-	facemesh.onResults(onResults);
-
+	
 	// 8, Webカメラを開始する
 	startCamera();
 })();
