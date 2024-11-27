@@ -85,8 +85,7 @@ let currentModel, facemesh;
 })();
 
 const onResults = results => {
-	// 9, フェイスメッシュの描画
-	drawResults(results.multiFaceLandmarks[0]);
+	
 	// 10, Live2Dモデルとランドマークを連動させる
 	animateLive2DModel(results.multiFaceLandmarks[0]);
 };
