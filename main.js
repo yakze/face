@@ -90,25 +90,7 @@ const onResults = results => {
 	animateLive2DModel(results.multiFaceLandmarks[0]);
 };
 
-// フェイスメッシュの描画
-const drawResults = points => {
-	if (!guideCanvas || !videoElement || !points) return;
-	guideCanvas.width = videoElement.videoWidth;
-	guideCanvas.height = videoElement.videoHeight;
-	let canvasCtx = guideCanvas.getContext("2d");
-	canvasCtx.save();
-	canvasCtx.clearRect(0, 0, guideCanvas.width, guideCanvas.height);
-	drawConnectors(canvasCtx, points, FACEMESH_TESSELATION, {
-		color: "#C0C0C070",
-		lineWidth: 1
-	});
-	if (points && points.length === 478) {
-		drawLandmarks(canvasCtx, [points[468], points[468 + 5]], {
-			color: "#ffe603",
-			lineWidth: 2
-		});
-	}
-};
+
 
 // Live2Dモデルとランドマークを連動させる
 const animateLive2DModel = points => {
