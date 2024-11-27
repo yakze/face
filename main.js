@@ -66,18 +66,50 @@ let currentModel, facemesh;
 	// 6, Live2Dモデルを配置する
 	app.stage.addChild(currentModel);
 
-	
+	// 7, フェイスメッシュの読み込みと設定をする
+	facemesh = new FaceMesh({
+		locateFile: file => {
+			return `https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/${file}`;
+		}
+	});
+	facemesh.setOptions({
+		maxNumFaces: 1,
+		refineLandmarks: true,
+		minDetectionConfidence: 0.5,
+		minTrackingConfidence: 0.5
+	});
+	facemesh.onResults(onResults);
+
 	// 8, Webカメラを開始する
 	startCamera();
 })();
 
 const onResults = results => {
-	
+	// 9, フェイスメッシュの描画
+	drawResults(results.multiFaceLandmarks[0]);
 	// 10, Live2Dモデルとランドマークを連動させる
 	animateLive2DModel(results.multiFaceLandmarks[0]);
 };
 
-
+// フェイスメッシュの描画
+const drawResults = points => {
+	if (!guideCanvas || !videoElement || !points) return;
+	guideCanvas.width = videoElement.videoWidth;
+	guideCanvas.height = videoElement.videoHeight;
+	let canvasCtx = guideCanvas.getContext("2d");
+	canvasCtx.save();
+	canvasCtx.clearRect(0, 0, guideCanvas.width, guideCanvas.height);
+	drawConnectors(canvasCtx, points, FACEMESH_TESSELATION, {
+		color: "#C0C0C070",
+		lineWidth: 1
+	});
+	if (points && points.length === 478) {
+		drawLandmarks(canvasCtx, [points[468], points[468 + 5]], {
+			color: "#ffe603",
+			lineWidth: 2
+		});
+	}
+};
 
 // Live2Dモデルとランドマークを連動させる
 const animateLive2DModel = points => {
