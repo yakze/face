@@ -16,14 +16,19 @@ video {
 #preview {
 	display: flex; flex-direction: column;
 	position: absolute;
-	top: 10px; left: 10px;
+	top: 16px; left: 16px;
 	overflow: hidden;
-	border-radius: 10px;
+	border-radius: 16px;
 }
 
 #preview canvas {
 	transform: scale(-1, 1);
 }
 
-
+#my-guides {
+display: none;
+	position: absolute;
+	top: 0; left: 0;
+	width: 100%; height: auto;
+	z-index: 1;
 }
