@@ -19,6 +19,7 @@ video {
 	top: 16px; left: 16px;
 	overflow: hidden;
 	border-radius: 16px;
+	display:none
 }
 
 #preview canvas {
