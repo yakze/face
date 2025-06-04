@@ -24,6 +24,7 @@ video {
 
 #preview canvas {
 	transform: scale(-1, 1);
+	display:none
 }
 
 #my-guides {
